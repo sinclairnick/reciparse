@@ -1,11 +1,12 @@
 {
   "name": "hrecipe",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "index.js",
   "author": "Nick Sinclair",
   "license": "MIT",
   "scripts": {
     "test": "jest",
+    "prepublish": "npm run build",
     "build": "tsc"
   },
   "dependencies": {
