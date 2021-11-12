@@ -1,13 +1,13 @@
 {
   "name": "hrecipe",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "index.js",
   "author": "Nick Sinclair",
   "license": "MIT",
   "scripts": {
     "test": "jest",
     "prepublish": "npm run build",
-    "build": "tsc"
+    "build": "tsc -p tsconfig.build.json"
   },
   "dependencies": {
     "axios": "^0.24.0",
