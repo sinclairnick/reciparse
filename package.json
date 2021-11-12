@@ -5,7 +5,8 @@
   "author": "Nick Sinclair",
   "license": "MIT",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc"
   },
   "dependencies": {
     "axios": "^0.24.0",
