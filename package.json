@@ -5,6 +5,7 @@
   "module": "dist/index.js",
   "author": "Nick Sinclair",
   "license": "MIT",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest",
     "prepublish": "npm run build",
