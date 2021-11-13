@@ -46,7 +46,7 @@ export type HRecipe = {
 	totalTime?: string;
 	recipeYield?: string;
 	recipeIngredient?: string[];
-	recipeInstructions?: Instruction;
+	recipeInstructions?: Instruction[];
 	recipeCategory?: string[];
 	author?: Author | Author[];
 	aggregateRating?: {
