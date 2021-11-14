@@ -4,16 +4,23 @@ export const extractYieldInfo = (servings?: string) => {
 	if (servings == null) {
 		return { amount: undefined, metric: undefined }
 	}
-	const amountRes = /\d+/.exec(servings)
-	const amount = amountRes?.[0]
+	const amountRes = /\d+(\/d+)?/.exec(servings)
+	const _amount = amountRes?.[0]
 
 	const metricRes = /[a-zA-Z]+/.exec(servings)
 	const metric = metricRes?.[0]
 
-	return {
-		amount: amount != null ? Number(amount) : undefined,
-		metric
+	if (_amount == null) {
+		return { amount: undefined, metric }
 	}
+
+	const nums = _amount.split("/").map(Number)
+
+	const amount = nums.length === 2
+		? (nums[0] / nums[1])
+		: nums[0]
+
+	return { amount, metric }
 }
 
 export const extractIngredientInfo = (ingredient: string) => {

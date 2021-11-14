@@ -23,13 +23,14 @@ describe("Extractors", () => {
 			["4 cups white flour", [4, "cup", "white flour"]],
 			["2 cloves garlic", [2, undefined, "cloves garlic"]],
 			["1 kg tuna", [1, "kilogram", "tuna"]],
-			["2 eggs", [2, undefined, "eggs"]]
+			["2 eggs", [2, undefined, "eggs"]],
+			["2/3 cup sugar", [2/3, "cup", "sugar"]]
 		] as const
 
 		it.each(tests)("Parse ingredients (%s)", (input, [expAmount, expMeasure, expName]) => {
 			const res = extractIngredientInfo(input)
 
-			expect(res.amount).toBe(expAmount)
+			expect(res.amount?.toPrecision(3)).toBe(expAmount.toPrecision(3))
 			expect(res.measure).toBe(expMeasure)
 			expect(res.name).toBe(expName)
 		})
