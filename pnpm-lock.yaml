@@ -1,7 +1,6 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@cucumber/microdata': ^1.5.0
   '@types/jest': ^27.0.2
   axios: ^0.24.0
   jest: ^27.3.1
@@ -11,7 +10,6 @@ specifiers:
   typescript: ^4.4.4
 
 dependencies:
-  '@cucumber/microdata': 1.5.0
   axios: 0.24.0
   node-html-parser: 5.1.0
   parse-ingredient: 0.4.0
@@ -364,10 +362,6 @@ packages:
   /@bcoe/v8-coverage/0.2.3:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
-
-  /@cucumber/microdata/1.5.0:
-    resolution: {integrity: sha512-iBR/WtPPV8Clc2e3WLNtwL6mCpvQH9gPxdwN9MrNPgqmdO4Efc3+S3rgbN1W9lboUZeuW4Wz6kbjoCRBj+/xEg==}
-    dev: false
 
   /@istanbuljs/load-nyc-config/1.1.0:
     resolution: {integrity: sha512-VjeHSlIzpv/NyD3N0YuHfXOPDIixcA1q2ZV98wsMqcYlPmv2n3Yb2lYP9XMElnaFVXg5A7YLTeLu6V84uQDjmQ==}
