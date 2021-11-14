@@ -1,5 +1,11 @@
-# Hrecipe
+# Reciparse
 
-> A simple, small package for parsing hrecipe data
+> A utility for scraping and parsing recipe data from common recipe websites
 
-Hrecipe data is a standard microformat for representing recipe data. It is useful for scraping and parsing recipe content.
+Reciparse aims to parse recipes with the following formats
+ - Structured LD JSON data
+ - hRecipe format
+ - Site-specific scraping
+in that order.
+
+> Currently only structured data is supported
