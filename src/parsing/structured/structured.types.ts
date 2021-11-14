@@ -30,17 +30,17 @@ export type Review = {
 	author: Author;
 };
 
-export type HRecipe = {
+export type SchemaOrgRecipe = {
 	"@context": string;
 	"@type": "Recipe";
-	mainEntityOfPage: string;
-	articleBody: string
-	headline: string
-	alternativeHeadline: string
-	name: string;
-	image: Image | Image[];
-	datePublished: string;
-	description: string;
+	mainEntityOfPage?: string;
+	articleBody?: string
+	headline?: string
+	alternativeHeadline?: string
+	name?: string;
+	image?: Image | Image[];
+	datePublished?: string;
+	description?: string;
 	prepTime?: string;
 	cookTime?: string;
 	totalTime?: string;
