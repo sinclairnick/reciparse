@@ -1,23 +1,24 @@
-export type Image = {
+
+export type SchemaOrgImageObject = {
 	"@type": "ImageObject";
 	url: string;
 	width: number;
 	height: number;
 };
 
-export type Instruction = {
+export type SchemaOrgHowToStep = {
 	"@type": "HowToStep";
 	text: string;
 };
 
-export type Author = {
+export type SchemaOrgPerson = {
 	"@type": "Person";
 	name: string;
-	image?: Image;
+	image?: SchemaOrgImageObject;
 	sameAs?: string;
 };
 
-export type Review = {
+export type SchemaOrgReview = {
 	"@type": "Review";
 	datePublished: string;
 	reviewBody: string;
@@ -27,10 +28,10 @@ export type Review = {
 		bestRating: string;
 		ratingValue: number;
 	};
-	author: Author;
+	author: SchemaOrgPerson;
 };
 
-export type SchemaOrgRecipe = {
+export interface SchemaOrgRecipe {
 	"@context": string;
 	"@type": "Recipe";
 	mainEntityOfPage?: string;
@@ -38,7 +39,7 @@ export type SchemaOrgRecipe = {
 	headline?: string
 	alternativeHeadline?: string
 	name?: string;
-	image?: Image | Image[];
+	image?: SchemaOrgImageObject | SchemaOrgImageObject[];
 	datePublished?: string;
 	description?: string;
 	prepTime?: string;
@@ -46,9 +47,9 @@ export type SchemaOrgRecipe = {
 	totalTime?: string;
 	recipeYield?: string;
 	recipeIngredient?: string[];
-	recipeInstructions?: Instruction[];
+	recipeInstructions?: SchemaOrgHowToStep[];
 	recipeCategory?: string[];
-	author?: Author | Author[];
+	author?: SchemaOrgPerson | SchemaOrgPerson[];
 	aggregateRating?: {
 		"@type": "AggregateRating";
 		ratingValue: number;
@@ -73,5 +74,5 @@ export type SchemaOrgRecipe = {
 		transFatContent: null;
 		unsaturatedFatContent: null;
 	};
-	review?: Review[];
-};
+	review?: SchemaOrgReview[];
+}
