@@ -11,7 +11,17 @@ describe("Hrecipe", () => {
 		const res = await axios.get(url)
 
 		const data = extractFromHRecipe(res.data)
-		console.log(data)
 
+		// Minimal info
+		expect(data?.ingredients.length).toBeGreaterThan(0)
+		expect(data?.steps.length).toBeGreaterThan(0)
+		expect(data?.title).toBeDefined()
+	})
+
+	it("Returns undefined for non-recipe sites", () => {
+		const google = "https://google.com"
+		const data = extractFromHRecipe(google)
+
+		expect(data).not.toBeDefined()
 	})
 })

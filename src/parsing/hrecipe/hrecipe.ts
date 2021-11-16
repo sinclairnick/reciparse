@@ -69,6 +69,17 @@ const getElementsByCascadingClassMap = (html: string, selectorMap: CascadingSele
 	return { title, ingredients, authors, steps, yield: yield_ }
 }
 
+export const isElsEmpty = (els: ReturnType<typeof getElementsByClassMap>) => {
+	if (els == null) {
+		return true
+	}
+	return els.authors.length === 0
+		&& els.ingredients.length === 0
+		&& els.steps.length === 0
+		&& els.title === undefined
+		&& els.yield === undefined
+}
+
 const computeCompletenessScore = (els: ReturnType<typeof getElementsByClassMap>) => {
 	if (els == null) {
 		return 0
@@ -107,7 +118,7 @@ export const getElements = (html: string) => {
 export const extractFromHRecipe = (html: string): Recipe | undefined => {
 	const elements = getElements(html)
 
-	if (elements == null) {
+	if (elements == null || isElsEmpty(elements)) {
 		return
 	}
 
