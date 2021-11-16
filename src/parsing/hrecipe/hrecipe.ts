@@ -47,7 +47,6 @@ const getElementsByClassMap = (html: string, selectorMap: SelectorMap) => {
 }
 
 const getElementsByCascadingClassMap = (html: string, selectorMap: CascadingSelectorMap) => {
-	console.debug("Getting elements via cascade method")
 	const document = HTMLParser.parse(html)
 	const recipeEl = document.querySelector(`*[itemtype=${RECIPE_SCHEMA_URL}]`) ?? document
 
@@ -93,10 +92,8 @@ const computeCompletenessScore = (els: ReturnType<typeof getElementsByClassMap>)
 
 export const getElements = (html: string) => {
 
-	console.debug("Getting elements via standard method")
 	const standardEls = getElementsByClassMap(html, HRECIPE_STANDARD)
 
-	console.debug("Getting elements via item prop method")
 	const itemPropEls = getElementsByClassMap(html, HRECIPE_ITEM_PROP)
 
 	const cascadedEls = getElementsByCascadingClassMap(html, EXHAUSTIVE_ITEM_PROP)
