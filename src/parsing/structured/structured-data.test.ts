@@ -5,7 +5,8 @@ const structuredRecipes = [
 	["Epicurious", "https://www.epicurious.com/recipes/food/views/hasselback-butternut-squash-with-bay-leaves"],
 	["AllRcipes", "https://www.allrecipes.com/recipe/230103/buttery-garlic-green-beans/"],
 	["BBC", "https://www.bbcgoodfood.com/recipes/chilli-con-carne-recipe"],
-	["BBC 2", "https://www.bbcgoodfood.com/recipes/chicken-kale-mushroom-pot-pie"]
+	["BBC 2", "https://www.bbcgoodfood.com/recipes/chicken-kale-mushroom-pot-pie"],
+	["Cafe delites", "https://cafedelites.com/butter-chicken/"]
 ]
 
 describe("Structured data", () => {

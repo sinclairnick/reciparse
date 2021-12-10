@@ -47,6 +47,7 @@ export const extractFromStructuredData = (html: string): Recipe[] => {
 		.map((el) => el.innerHTML)
 		.filter(isNotNull);
 
+
 	const candidates: SchemaOrgRecipe[] = []
 
 	for (const html of htmls) {
@@ -57,6 +58,14 @@ export const extractFromStructuredData = (html: string): Recipe[] => {
 				candidates.push(hrecipe)
 			}
 			continue
+		}
+		if ("@graph" in data) {
+			const maybeRecipes = data["@graph"]
+			for (const maybeRecipe of maybeRecipes) {
+				if (isStructuredRecipe(maybeRecipe)) {
+					candidates.push(maybeRecipe)
+				}
+			}
 		}
 		if (isStructuredRecipe(data)) {
 			candidates.push(data)
