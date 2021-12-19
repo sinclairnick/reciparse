@@ -1,9 +1,11 @@
+export * from "./structured"
+export * from "./hrecipe"
+
 import axios from "axios"
 import { InvalidUrlException, Recipe } from ".."
-import { checkIsDomainSupported, parseWithCustom, validateForCustomDomain } from "./custom"
+import { checkIsDomainSupported, parseWithCustom } from "./custom/parsers"
 import { extractFromHRecipe } from "./hrecipe/hrecipe"
 import { extractFromStructuredData } from "./structured/structured-data"
-export * from "./structured"
 import { URL } from "url"
 import { checkIsValidUrl } from "../common/constants"
 

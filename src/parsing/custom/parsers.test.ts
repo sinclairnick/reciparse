@@ -1,6 +1,6 @@
 import axios from "axios"
 import { URL } from "url"
-import { parseWithCustom } from "."
+import { parseWithCustom } from "./parsers"
 
 
 describe("Parsers", () => {

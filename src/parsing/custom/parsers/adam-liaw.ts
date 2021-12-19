@@ -1,5 +1,5 @@
 import { Author, extractIngredientInfo, Ingredient, Step } from "../../..";
-import { createParser } from "../parser.type";
+import { createParser } from "../parsers.type";
 import * as HTMLParser from "node-html-parser"
 
 export const AdamLiaw = createParser({
