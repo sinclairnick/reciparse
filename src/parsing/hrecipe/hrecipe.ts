@@ -30,7 +30,7 @@ const generateSelectorFromAttr = (val: { attr: string, value: string }) => {
 
 const getElementsByClassMap = (html: string, selectorMap: SelectorMap) => {
 	const document = HTMLParser.parse(html)
-	const recipeEl = document.querySelector(`*[itemtype=${RECIPE_SCHEMA_URL}]`) ?? document
+	const recipeEl = document.querySelector(`${generateSelectorFromAttr(selectorMap.root)}`)
 
 	if (recipeEl == null) {
 		return
@@ -48,24 +48,28 @@ const getElementsByClassMap = (html: string, selectorMap: SelectorMap) => {
 
 const getElementsByCascadingClassMap = (html: string, selectorMap: CascadingSelectorMap) => {
 	const document = HTMLParser.parse(html)
-	const recipeEl = document.querySelector(`*[itemtype=${RECIPE_SCHEMA_URL}]`) ?? document
 
-	if (recipeEl == null) {
-		return
-	}
+	const recipes = selectorMap.root.map(root => {
+		const recipeEl = document.querySelector(`${generateSelectorFromAttr(root)}`)
 
-	const title = selectorMap.title.map(attr => document.querySelector(generateSelectorFromAttr(attr)))
-		.find(isNotNull) ?? undefined
-	const ingredients = selectorMap.ingredients.map(attr => document.querySelectorAll(generateSelectorFromAttr(attr)))
-		.find(x => x.length > 0) ?? []
-	const steps = selectorMap.steps.map(attr => document.querySelectorAll(generateSelectorFromAttr(attr)))
-		.find(x => x.length > 0) ?? []
-	const authors = selectorMap.authors.map(attr => document.querySelectorAll(generateSelectorFromAttr(attr)))
-		.find(x => x.length > 0) ?? []
-	const yield_ = selectorMap.yield.map(attr => document.querySelector(generateSelectorFromAttr(attr)))
-		.find(isNotNull) ?? undefined
+		if (recipeEl == null) {
+			return
+		}
 
-	return { title, ingredients, authors, steps, yield: yield_ }
+		const title = selectorMap.title.map(attr => recipeEl.querySelector(generateSelectorFromAttr(attr)))
+			.find(isNotNull) ?? undefined
+		const ingredients = selectorMap.ingredients.map(attr => recipeEl.querySelectorAll(generateSelectorFromAttr(attr)))
+			.find(x => x.length > 0) ?? []
+		const steps = selectorMap.steps.map(attr => recipeEl.querySelectorAll(generateSelectorFromAttr(attr)))
+			.find(x => x.length > 0) ?? []
+		const authors = selectorMap.authors.map(attr => recipeEl.querySelectorAll(generateSelectorFromAttr(attr)))
+			.find(x => x.length > 0) ?? []
+		const yield_ = selectorMap.yield.map(attr => recipeEl.querySelector(generateSelectorFromAttr(attr)))
+			.find(isNotNull) ?? undefined
+
+		return { title, ingredients, authors, steps, yield: yield_ }
+	})
+	return recipes.find(isNotNull)
 }
 
 export const isElsEmpty = (els: ReturnType<typeof getElementsByClassMap>) => {

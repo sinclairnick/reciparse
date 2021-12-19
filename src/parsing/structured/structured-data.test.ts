@@ -6,7 +6,8 @@ const structuredRecipes = [
 	["AllRcipes", "https://www.allrecipes.com/recipe/230103/buttery-garlic-green-beans/"],
 	["BBC", "https://www.bbcgoodfood.com/recipes/chilli-con-carne-recipe"],
 	["BBC 2", "https://www.bbcgoodfood.com/recipes/chicken-kale-mushroom-pot-pie"],
-	["Cafe delites", "https://cafedelites.com/butter-chicken/"]
+	["BBC 3", "https://www.bbcgoodfood.com/recipes/3-veg-mac-n-cheese"],
+	["Cafe delites", "https://cafedelites.com/butter-chicken/"],
 ]
 
 describe("Structured data", () => {

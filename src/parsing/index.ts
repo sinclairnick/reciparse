@@ -1,10 +1,11 @@
 import axios from "axios"
+import { Recipe } from ".."
 import { extractFromHRecipe } from "./hrecipe/hrecipe"
 import { extractFromStructuredData } from "./structured/structured-data"
 export * from "./structured"
 
 
-export const parseFromUrl = async (url: string) => {
+export const parseFromUrl = async (url: string): Promise<Recipe[]> => {
 	const res = await axios.get(url)
 	const html = res.data
 	const candidates = extractFromStructuredData(html)
@@ -14,8 +15,5 @@ export const parseFromUrl = async (url: string) => {
 	}
 
 	const recipe = extractFromHRecipe(html)
-	if (recipe != null) {
-		return [recipe]
-	}
-
+	return recipe ? [recipe] : []
 }
