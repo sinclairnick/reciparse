@@ -13,15 +13,3 @@ export const parseWithCustom = (html: string, domain: keyof typeof parsers): Pro
 export const checkIsDomainSupported = (domain?: string): domain is keyof typeof parsers => {
 	return domain !== undefined && Object.keys(parsers).includes(domain)
 }
-
-
-export const validateForCustomDomain = (url: string):
-	| { hasCustomParser: true, domain: keyof typeof parsers }
-	| { hasCustomParser: false, domain: string } => {
-	const urlObject = new URL(url)
-	const domain = urlObject.host
-
-	const isDomainSupported = checkIsDomainSupported(domain)
-
-	return isDomainSupported ? { hasCustomParser: true, domain } : { hasCustomParser: false, domain }
-}

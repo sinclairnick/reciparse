@@ -18,7 +18,10 @@ export const parseFromUrl = async (url: string): Promise<Recipe[]> => {
 		throw new InvalidUrlException()
 	}
 
-	const { hasCustomParser, domain } = validateForCustomDomain(url)
+	const urlObject = new URL(url)
+	const domain = urlObject.host
+
+	const hasCustomParser = checkIsDomainSupported(domain)
 	if (hasCustomParser) {
 		const recipe = await parseWithCustom(html, domain)
 		return recipe ? [recipe] : []
