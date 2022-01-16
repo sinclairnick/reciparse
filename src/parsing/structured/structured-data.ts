@@ -17,16 +17,17 @@ const extractAuthors = (authors: SchemaOrgRecipe["author"]): Recipe["authors"] =
 }
 
 const extractIngredients = (ingredients: SchemaOrgRecipe["recipeIngredient"]): Recipe["ingredients"] => {
-	return ingredients?.map(ing => extractIngredientInfo(ing)) ?? []
+	return Array.isArray(ingredients) ? ingredients?.map(ing => extractIngredientInfo(ing)) : []
 }
 
 const extractSteps = (steps: SchemaOrgRecipe["recipeInstructions"]): Recipe["steps"] => {
-	return steps?.map(step => ({ text: step.text })) ?? []
+	return Array.isArray(steps) ? steps?.map(step => ({ text: step.text })) : []
 }
 
 const transformSchemaOrgRecipe = (data: SchemaOrgRecipe): Recipe => {
 	const authors = extractAuthors(data.author)
 	const ingredients = extractIngredients(data.recipeIngredient)
+	console.log(data)
 	const steps = extractSteps(data.recipeInstructions)
 	const yieldResult = extractYieldInfo(data.recipeYield)
 
