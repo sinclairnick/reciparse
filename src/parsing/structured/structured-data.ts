@@ -20,14 +20,23 @@ const extractIngredients = (ingredients: SchemaOrgRecipe["recipeIngredient"]): R
 	return Array.isArray(ingredients) ? ingredients?.map(ing => extractIngredientInfo(ing)) : []
 }
 
-const extractSteps = (steps: SchemaOrgRecipe["recipeInstructions"]): Recipe["steps"] => {
-	return Array.isArray(steps) ? steps?.map(step => ({ text: step.text })) : []
-}
+const extractSteps = (
+  steps: SchemaOrgRecipe["recipeInstructions"]
+): Recipe["steps"] => {
+  if (Array.isArray(steps)) {
+    return steps?.map((step) => ({ text: step.text }));
+  }
+  if (typeof steps === "string") {
+    const html = HTMLParser.parse(steps);
+	const parent = html.childNodes.length > 1 ? html : html.childNodes[0]
+    return parent?.childNodes.map((x) => ({ text: x.innerText }));
+  }
+  return [];
+};
 
 const transformSchemaOrgRecipe = (data: SchemaOrgRecipe): Recipe => {
 	const authors = extractAuthors(data.author)
 	const ingredients = extractIngredients(data.recipeIngredient)
-	console.log(data)
 	const steps = extractSteps(data.recipeInstructions)
 	const yieldResult = extractYieldInfo(data.recipeYield)
 

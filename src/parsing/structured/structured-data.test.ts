@@ -9,12 +9,11 @@ const structuredRecipes = [
 	["BBC 3", "https://www.bbcgoodfood.com/recipes/3-veg-mac-n-cheese"],
 	["Cafe delites", "https://cafedelites.com/butter-chicken/"],
 	["Natashas kitchen", "https://natashaskitchen.com/perfect-burger-recipe/"],
+	["Jamie Oliver", "https://www.jamieoliver.com/recipes/chicken-recipes/chicken-tikka-masala/"]
 ]
 
 /** Just using these to smoke test, they are imperfectly represented in structured form on their side */
-const problematicRecipes = [
-	["Jamie Oliver", "https://www.jamieoliver.com/recipes/chicken-recipes/chicken-tikka-masala/"]
-]
+// const problematicRecipes: [string, string][] = []
 
 describe("Structured data", () => {
 
@@ -29,11 +28,13 @@ describe("Structured data", () => {
 		expect(first.yield).toBeDefined()
 	})
 
-	it.each(problematicRecipes)("Does not error for problematic recipes (%s)", async (name, url) => {
-		const res = await axios.get(url)
-		const html = res.data
-		const [first] = extractFromStructuredData(html)
-	})
+	// it.each(problematicRecipes)("Does not error for problematic recipes (%s)", async (name, url) => {
+	// 	const res = await axios.get(url)
+	// 	const html = res.data
+	// 	const [first] = extractFromStructuredData(html)
+
+	// 	console.log(first)
+	// })
 
 
 })
