@@ -29,14 +29,16 @@ export const extractIngredientInfo = (
   | { type: "group"; value: string } => {
   const sanitisedIngredient = ingredient.replace(" of ", " ");
 
-  const isIngredientAGroup = /(^for|:$)/gi.test(sanitisedIngredient);
-
-  if (isIngredientAGroup) {
-    return { type: "group", value: sanitisedIngredient };
-  }
-
   try {
     const [ing] = parseIngredient(sanitisedIngredient, { normalizeUOM: true });
+
+    if (ing.isGroupHeader) {
+      return {
+        type: "group",
+        value: ing.description,
+      };
+    }
+
     return {
       type: "ingredient",
       value: {
