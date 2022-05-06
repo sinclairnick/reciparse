@@ -1,4 +1,9 @@
-import { extractIngredientInfo, extractYieldInfo } from "./extractors";
+import {
+  extractIngredientInfo,
+  extractIngredientsFromRaw,
+  extractYieldInfo,
+} from "./extractors";
+import { Ingredient } from "./types";
 
 describe("Extractors", () => {
   describe("Extract yield", () => {
@@ -54,5 +59,32 @@ describe("Extractors", () => {
 
       expect(extracted.value).toBe(input);
     });
+  });
+
+  describe("Extract many ingredients with groups", () => {
+    const inputs: string[] = [
+      "4 cups white flour",
+      "For sauce",
+      "Salt",
+      "Milk",
+    ];
+    const expected: Ingredient[] = [
+      { name: "white flour", amount: 4, measure: "cup", group: undefined },
+      {
+        name: "Salt",
+        amount: undefined,
+        measure: undefined,
+        group: "For sauce",
+      },
+      {
+        name: "Milk",
+        amount: undefined,
+        measure: undefined,
+        group: "For sauce",
+      },
+    ];
+    const ingredients = extractIngredientsFromRaw(inputs);
+
+    expect(ingredients).toEqual(expected);
   });
 });
