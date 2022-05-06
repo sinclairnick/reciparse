@@ -4,7 +4,7 @@ import {
   extractIngredientInfo,
   extractYieldInfo,
 } from "../../common/extractors";
-import { Recipe, Step } from "../../common/types";
+import { Ingredient, Recipe, Step } from "../../common/types";
 import { SchemaOrgRecipe } from "./structured.types";
 
 const isStructuredRecipe = (val: any): val is SchemaOrgRecipe => {
@@ -36,10 +36,20 @@ const extractAuthors = (
 
 const extractIngredients = (
   ingredients: SchemaOrgRecipe["recipeIngredient"]
-): Recipe["ingredients"] => {
-  return Array.isArray(ingredients)
-    ? ingredients?.map((ing) => extractIngredientInfo(ing))
-    : [];
+): Ingredient[] => {
+  if (!Array.isArray(ingredients)) return [];
+  let activeGroup: string | undefined;
+  let result: Ingredient[] = [];
+  for (const ing of ingredients) {
+    const extracted = extractIngredientInfo(ing);
+    if (extracted.type === "ingredient") {
+      result.push({ ...extracted.value, group: activeGroup });
+      continue;
+    }
+
+    activeGroup = extracted.value;
+  }
+  return result;
 };
 
 const extractStep = (
