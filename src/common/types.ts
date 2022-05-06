@@ -18,9 +18,9 @@ export type Recipe = {
   authors: Author[];
   title?: string;
   yield?: number;
-  prepTime?: string;
-  cookingTime?: string;
-  totalTime?: string;
+  prepTime?: number;
+  cookingTime?: number;
+  totalTime?: number;
   yieldMetric?: string;
   ingredients: Ingredient[];
   steps: Step[];

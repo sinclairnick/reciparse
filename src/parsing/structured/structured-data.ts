@@ -69,11 +69,32 @@ const extractSteps = (steps: SchemaOrgRecipe["recipeInstructions"]): Step[] => {
   return [];
 };
 
+export const extractTime = (time?: string) => {
+  if (time === undefined) {
+    return;
+  }
+  const withoutAlpha = time.replace(/[A-Za-z]/g, "");
+  const asNumber = Number(withoutAlpha);
+
+  return isNaN(asNumber) ? undefined : asNumber;
+};
+
+export const extractTimes = (
+  data: Pick<SchemaOrgRecipe, "cookTime" | "prepTime" | "totalTime">
+): Pick<Recipe, "cookingTime" | "prepTime" | "totalTime"> => {
+  return {
+    cookingTime: extractTime(data.cookTime),
+    prepTime: extractTime(data.prepTime),
+    totalTime: extractTime(data.totalTime),
+  };
+};
+
 const transformSchemaOrgRecipe = (data: SchemaOrgRecipe): Recipe => {
   const authors = extractAuthors(data.author);
   const ingredients = extractIngredients(data.recipeIngredient);
   const steps = extractSteps(data.recipeInstructions);
   const yieldResult = extractYieldInfo(data.recipeYield);
+  const times = extractTimes(data);
 
   return {
     title: data.name,
@@ -82,6 +103,9 @@ const transformSchemaOrgRecipe = (data: SchemaOrgRecipe): Recipe => {
     ingredients,
     yield: yieldResult.amount,
     yieldMetric: yieldResult.metric,
+    cookingTime: times.cookingTime,
+    prepTime: times.prepTime,
+    totalTime: times.totalTime,
   };
 };
 
