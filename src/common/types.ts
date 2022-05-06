@@ -1,22 +1,27 @@
 export type Author = {
-	name?: string
-}
+  name?: string;
+};
 
 export type Ingredient = {
-	name?: string
-	amount?: number
-	measure?: string
-}
+  name?: string;
+  amount?: number;
+  measure?: string;
+  group?: string;
+};
 
 export type Step = {
-	text?: string
-}
+  text?: string;
+  group?: string;
+};
 
 export type Recipe = {
-	authors: Author[]
-	title?: string
-	yield?: number
-	yieldMetric?: string
-	ingredients: Ingredient[]
-	steps: Step[]
-}
+  authors: Author[];
+  title?: string;
+  yield?: number;
+  prepTime?: string;
+  cookingTime?: string;
+  totalTime?: string;
+  yieldMetric?: string;
+  ingredients: Ingredient[];
+  steps: Step[];
+};

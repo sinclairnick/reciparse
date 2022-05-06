@@ -4,7 +4,7 @@ import {
   extractIngredientInfo,
   extractYieldInfo,
 } from "../../common/extractors";
-import { Recipe } from "../../common/types";
+import { Recipe, Step } from "../../common/types";
 import { SchemaOrgRecipe } from "./structured.types";
 
 const isStructuredRecipe = (val: any): val is SchemaOrgRecipe => {
@@ -42,12 +42,25 @@ const extractIngredients = (
     : [];
 };
 
-const extractSteps = (
-  steps: SchemaOrgRecipe["recipeInstructions"]
-): Recipe["steps"] => {
-  if (Array.isArray(steps)) {
-    return steps?.map((step) => ({ text: step.text }));
+const extractStep = (
+  step: NonNullable<SchemaOrgRecipe["recipeInstructions"]>[number]
+): Step[] => {
+  if (step["@type"] === "HowToStep") {
+    return [{ text: step.text }];
   }
+  return step.itemListElement.map((item) => ({
+    group: step.name,
+    text: item.text,
+  }));
+};
+
+const extractSteps = (steps: SchemaOrgRecipe["recipeInstructions"]): Step[] => {
+  if (Array.isArray(steps)) {
+    return steps?.reduce((arr: Step[], step) => {
+      return [...arr, ...extractStep(step)];
+    }, []);
+  }
+  // When HTML
   if (typeof steps === "string") {
     const html = HTMLParser.parse(steps);
     const parent = html.childNodes.length > 1 ? html : html.childNodes[0];
