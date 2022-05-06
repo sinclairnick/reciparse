@@ -49,3 +49,20 @@ export const extractIngredientInfo = (
     throw new Error(`Failed to parse ingredient info (${ingredient})`);
   }
 };
+
+export const extractIngredientsFromRaw = (
+  ingredients: string[]
+): Ingredient[] => {
+  let activeGroup: string | undefined;
+  let result: Ingredient[] = [];
+  for (const ing of ingredients) {
+    const extracted = extractIngredientInfo(ing);
+    if (extracted.type === "ingredient") {
+      result.push({ ...extracted.value, group: activeGroup });
+      continue;
+    }
+
+    activeGroup = extracted.value;
+  }
+  return result;
+};

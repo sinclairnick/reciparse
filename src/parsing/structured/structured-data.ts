@@ -2,6 +2,7 @@ import * as HTMLParser from "node-html-parser";
 import { isNotNull } from "../../common/constants";
 import {
   extractIngredientInfo,
+  extractIngredientsFromRaw,
   extractYieldInfo,
 } from "../../common/extractors";
 import { Ingredient, Recipe, Step } from "../../common/types";
@@ -38,18 +39,7 @@ const extractIngredients = (
   ingredients: SchemaOrgRecipe["recipeIngredient"]
 ): Ingredient[] => {
   if (!Array.isArray(ingredients)) return [];
-  let activeGroup: string | undefined;
-  let result: Ingredient[] = [];
-  for (const ing of ingredients) {
-    const extracted = extractIngredientInfo(ing);
-    if (extracted.type === "ingredient") {
-      result.push({ ...extracted.value, group: activeGroup });
-      continue;
-    }
-
-    activeGroup = extracted.value;
-  }
-  return result;
+  return extractIngredientsFromRaw(ingredients);
 };
 
 const extractStep = (
