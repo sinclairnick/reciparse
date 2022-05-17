@@ -45,6 +45,9 @@ const extractIngredients = (
 const extractStep = (
   step: NonNullable<SchemaOrgRecipe["recipeInstructions"]>[number]
 ): Step[] => {
+  if (typeof step === "string") {
+    return [{ text: step }];
+  }
   if (step["@type"] === "HowToStep") {
     return [{ text: step.text }];
   }

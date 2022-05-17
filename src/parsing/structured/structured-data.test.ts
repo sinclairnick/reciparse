@@ -30,6 +30,10 @@ const structuredRecipes = [
     "Spruce eats",
     "https://www.thespruceeats.com/braised-pork-belly-recipe-1135629",
   ],
+  [
+    "Ethan Chlebowski",
+    "https://www.ethanchlebowski.com/cooking-techniques-recipes/fiery-carbonara",
+  ],
 ];
 
 /** Just using these to smoke test, they are imperfectly represented in structured form on their side */
@@ -49,8 +53,6 @@ describe("Structured data", () => {
         false
       );
       expect(first.steps.length).toBeGreaterThan(0);
-      // Contains html
-      expect(first.yield).toBeDefined();
     }
   );
 

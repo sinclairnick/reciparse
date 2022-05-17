@@ -14,7 +14,8 @@ export type SchemaOrgHowToStep =
       "@type": "HowToSection";
       name: string;
       itemListElement: Extract<SchemaOrgHowToStep, { "@type": "HowToStep" }>[];
-    };
+    }
+  | string;
 
 export type SchemaOrgPerson = {
   "@type": "Person";
